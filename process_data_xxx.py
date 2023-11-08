@@ -14,11 +14,11 @@ df['QTY'] = df['Krasta QTY'] + df['Remte QTY']
 # Remove SKUs starting with 'MOP', 'VMO', or 'OEM'
 df = df[~df['SKU \ QTY'].str.startswith(('MOP', 'VMO', 'OEM'))]
 
-# Remove first three characters from the SKU column
-df['SKU \ QTY'] = df['SKU \ QTY'].str[3:]
+# Remove first three characters from the SKU column and add 'XXX' to the beginning
+df['SKU \ QTY'] = 'XXX' + df['SKU \ QTY'].str[3:]
 
 # Filter the data for SKUs with QTY > 0
-greater_than_zero = df[df['QTY'] >= 0]
+greater_than_zero = df[df['QTY'] > 0]
 
 # Group by SKU and get the lowest cost for each SKU where QTY > 0
 summary_gt_zero = greater_than_zero.groupby('SKU \ QTY').agg({'QTY': 'sum', 'Cost': 'min'})
@@ -37,7 +37,7 @@ summary.to_csv('autometro_LV_xxx.csv', index_label='SKU')
 #
 # df['SKU \ QTY'] = df['SKU \ QTY'].str[3:]
 #
-# greater_than_zero = df[df['QTY'] >= 0]
+# greater_than_zero = df[df['QTY'] > 0]
 #
 # summary_gt_zero = greater_than_zero.groupby('SKU \ QTY').agg({'QTY': 'sum', 'Cost': 'min'})
 #
@@ -53,7 +53,7 @@ summary.to_csv('autometro_LV_xxx.csv', index_label='SKU')
 #
 # df['SKU \ QTY'] = df['SKU \ QTY'].str[3:]
 #
-# greater_than_zero = df[df['QTY'] >= 0]
+# greater_than_zero = df[df['QTY'] > 0]
 #
 # summary_gt_zero = greater_than_zero.groupby('SKU \ QTY').agg({'QTY': 'sum', 'Cost': 'min'})
 #
@@ -70,7 +70,7 @@ summary.to_csv('autometro_LV_xxx.csv', index_label='SKU')
 #
 # df['SKU \ QTY'] = df['SKU \ QTY'].str[3:]
 #
-# greater_than_zero = df[df['QTY'] >= 0]
+# greater_than_zero = df[df['QTY'] > 0]
 #
 # summary_gt_zero = greater_than_zero.groupby('SKU \ QTY').agg({'QTY': 'sum', 'Cost': 'min'})
 #
