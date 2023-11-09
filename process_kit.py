@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Read the CSV files based on the SKU prefix
-configurable_df = pd.read_csv('configurable_file.csv')
+configurable_df = pd.read_csv('KIT_file.csv')
 source_df = pd.read_csv('autometro_LV_simple_product.csv')
 source_df_xxx = pd.read_csv('autometro_LV_xxx.csv')
 
@@ -12,14 +12,16 @@ part_costs = {}
 # Iterate through each row in the source dataframe
 for index, row in source_df.iterrows():
     part_sku = row['SKU']
-    part_quantities[part_sku] = row['QTY']
-    part_costs[part_sku] = row['Cost']
+    if part_sku not in part_quantities or row['QTY'] > 0:
+        part_quantities[part_sku] = row['QTY']
+        part_costs[part_sku] = row['Cost']
 
 # Iterate through each row in the source dataframe with prefix 'XXX'
 for index, row in source_df_xxx.iterrows():
     part_sku = row['SKU']
-    part_quantities[part_sku] = row['QTY']
-    part_costs[part_sku] = row['Cost']
+    if part_sku not in part_quantities or row['QTY'] > 0:
+        part_quantities[part_sku] = row['QTY']
+        part_costs[part_sku] = row['Cost']
 
 # Initialize a dictionary to store the quantities and costs of each kit_sku
 kit_quantities = {}
