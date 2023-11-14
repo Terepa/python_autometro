@@ -1,4 +1,0 @@
-*/2 * * * * root echo "Hello from container $(date)" >> /var/log/cron.log 2>&1
-*/2 * * * * root /usr/local/bin/python /app/process_MONEO.py  >> /var/log/cron.log 2>&1
-*/2 * * * * root /usr/local/bin/python /app/process_MAGENTO.py  >> /var/log/cron.log 2>&1
-#Empty line

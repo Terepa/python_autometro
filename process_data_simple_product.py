@@ -3,7 +3,7 @@ import pandas as pd
 ###  -----------------------------   AUTOMETRO_LV -----------------------   ###
 
 # Read the CSV file into a Pandas DataFrame
-df = pd.read_csv("autometro_LV.csv")
+df = pd.read_csv("input_files/autometro_LV.csv")
 
 # Sum the 'Krasta QTY' and 'Remte QTY' columns into a new 'QTY' column
 df['QTY'] = df['Krasta QTY'] + df['Remte QTY']
@@ -31,7 +31,7 @@ summary.to_csv('autometro_LV_simple_product.csv', index_label='SKU')
 ###  -----------------------------   AUTOMETRO_UK -----------------------   ###
 
 
-df = pd.read_csv("autometro_UK.csv")
+df = pd.read_csv("input_files/autometro_UK.csv")
 
 greater_than_zero = df[df['QTY'] > 0]
 
@@ -47,7 +47,7 @@ summary.to_csv('autometro_UK_simple_product.csv', index_label='SKU')
 
 ###  -----------------------------   AUTOMETRO_IT -----------------------   ###
 
-df = pd.read_csv("autometro_IT.csv")
+df = pd.read_csv("input_files/autometro_IT.csv")
 
 greater_than_zero = df[df['QTY'] > 0]
 
@@ -65,7 +65,7 @@ summary.to_csv('autometro_IT_simple_product.csv', index_label='SKU')
 
 ###  -----------------------------   AUTOMETRO_DE -----------------------   ###
 
-df = pd.read_csv("autometro_DE.csv")
+df = pd.read_csv("input_files/autometro_DE.csv")
 
 greater_than_zero = df[df['QTY'] > 0]
 

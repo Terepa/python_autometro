@@ -40,9 +40,9 @@ if response.status_code == 200:
         df.drop_duplicates(subset='itemcode', keep='first', inplace=True)
 
         # Save DataFrame to CSV file
-        df.to_csv("output.csv", index=False)
+        df.to_csv("/app/output/moneo_daily.csv", index=False)
 
-        print("Data saved to output.csv")
+        print("Data saved to /app/output/moneo_daily.csv")
     except Exception as e:
         print(f"Error processing response: {e}")
 else:

@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Read the CSV files based on the SKU prefix
-configurable_df = pd.read_csv('KIT_file.csv')
+configurable_df = pd.read_csv('input_files/KIT_file.csv')
 source_df = pd.read_csv('autometro_LV_simple_product.csv')
 source_df_xxx = pd.read_csv('autometro_LV_xxx.csv')
 
