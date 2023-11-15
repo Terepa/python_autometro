@@ -10,7 +10,7 @@ COPY process_MAGENTO.py /app/process_MAGENTO.py
 COPY app.py /app/app.py
 COPY requirements.txt /app/requirements.txt
 COPY cronjobs /etc/cron.d/cronjobs
-COPY output /app/output
+COPY ./output/checked_SKU_20231114_195441.csv /app/output/
 
 # Install any dependencies your scripts and app might have
 RUN pip install -r requirements.txt
@@ -27,8 +27,10 @@ RUN chmod 0644 /var/log/cron.log
 # Install cron
 RUN apt update
 RUN apt install cron -y
+RUN apt-get update && \
+    apt-get install -y nano
 
 CMD cron && tail -f /var/log/cron.log
-
+EXPOSE 8050:8050
 
 

@@ -61,10 +61,12 @@ app.layout = html.Div([
     DataTable(
         id='data-table',
         columns=[
+
             {'name': col, 'id': col, 'selectable': True} for col in df.columns if col not in ['instock']
         ],
         data=df.to_dict('records'),
         style_table={'overflowX': 'auto'},
+        style_cell={'maxWidth': '300px', 'overflow': 'hidden', 'textOverflow': 'ellipsis'},
         editable=True,
         filter_action="native",
         sort_action="native",
