@@ -4,6 +4,7 @@ from dash import dcc, html
 from dash.dependencies import Input, Output
 from dash_table import DataTable
 import pandas as pd
+import dash_auth
 import glob
 
 # Find the latest file that starts with "checked_SKU_"
@@ -18,8 +19,17 @@ else:
 # Load CSV data
 df = pd.read_csv(latest_file)
 
+# Define valid username-password pairs
+VALID_USERNAME_PASSWORD_PAIRS = {'username': 'password'}
+
 # Initialize the Dash app with a Bootstrap theme
 app = dash.Dash(__name__, external_stylesheets=['https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'])
+
+# Enable basic authentication
+auth = dash_auth.BasicAuth(
+    app,
+    VALID_USERNAME_PASSWORD_PAIRS
+)
 
 # Define app layout
 app.layout = html.Div([

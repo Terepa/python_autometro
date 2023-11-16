@@ -77,7 +77,7 @@ def process_row(row, total_rows, start_time):
     return pd.Series(row_dict, index=row._fields)
 
 # Load CSV file
-df = pd.read_csv("/app/output/moneo_daily.csv")
+df = pd.read_csv("./output/moneo_daily.csv")
 
 # Drop the 'sernr' column if it exists
 df = df.drop(columns=["sernr"], errors="ignore")
@@ -95,7 +95,7 @@ carlist_api_key = "22F788B8-5CA8-46F9-9023-BAF1CD12D555"
 total_rows = len(df)
 start_time = time.time()  # Record start time
 
-with ThreadPoolExecutor(max_workers=None) as executor:  # Use None for auto-detecting the number of available CPUs
+with ThreadPoolExecutor(max_workers=30) as executor:  # Use None for auto-detecting the number of available CPUs
     processed_rows = list(executor.map(lambda row: process_row(row, total_rows, start_time), df.itertuples(index=True)))
 
 # Update the DataFrame with processed rows
@@ -103,7 +103,7 @@ df = pd.DataFrame(processed_rows)
 
 # Generate filename with current date and time
 current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
-filename = f"/app/output/checked_SKU_{current_datetime}.csv"
+filename = f"./output/checked_SKU_{current_datetime}.csv"
 df.to_csv(filename, index=False)
 
 # Calculate elapsed time
