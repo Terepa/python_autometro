@@ -1,12 +1,22 @@
+import os
+import glob
 import pandas as pd
-import sys
+from datetime import datetime
 
-print(sys.executable)
 
 ###  -----------------------------   AUTOMETRO_LV -----------------------   ###
 
-# Read the CSV file into a Pandas DataFrame
-df = pd.read_csv("autometro_LV_simple_product.csv")
+# Find the latest file that starts with "checked_SKU_"
+files = glob.glob("./output/autometro_LV_simple_*.csv")
+
+if files:
+    latest_file = max(files, key=os.path.getctime)
+    # Rest of your code...
+else:
+    print("No files matching the pattern found.")
+
+# Load CSV data
+df = pd.read_csv(latest_file)
 
 # Remove SKUs starting with 'MOP', 'VMO', or 'OEM'
 df = df[~df['SKU'].str.startswith(('MOP', 'VMO', 'OEM'))]
@@ -23,12 +33,25 @@ summary_gt_zero = greater_than_zero.groupby('SKU').agg({'QTY': 'sum', 'Cost': 'm
 # Concatenate summaries
 summary = pd.concat([summary_gt_zero])
 
-# Export the result to a new CSV file
-summary.to_csv('autometro_LV_xxx.csv', index_label='SKU')
+# Generate filename with current date and time
+current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
+filename = f"./output/autometro_LV_xxx_{current_datetime}.csv"
+summary.to_csv(filename, index_label='SKU')
+
 
 ###  -----------------------------   AUTOMETRO_UK -----------------------   ###
 
-df = pd.read_csv("autometro_UK_simple_product.csv")
+# Find the latest file that starts with "checked_SKU_"
+files = glob.glob("./output/autometro_UK_simple*.csv")
+
+if files:
+    latest_file = max(files, key=os.path.getctime)
+    # Rest of your code...
+else:
+    print("No files matching the pattern found.")
+
+# Load CSV data
+df = pd.read_csv(latest_file)
 
 df = df[~df['SKU'].str.startswith(('MOP', 'VMO', 'OEM'))]
 
@@ -40,11 +63,26 @@ summary_gt_zero = greater_than_zero.groupby('SKU').agg({'QTY': 'sum', 'Cost': 'm
 
 summary = pd.concat([summary_gt_zero])
 
-summary.to_csv('autometro_UK_xxx.csv', index_label='SKU')
+
+# Generate filename with current date and time
+current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
+filename = f"./output/autometro_UK_xxx_{current_datetime}.csv"
+summary.to_csv(filename, index_label='SKU')
 
 ###  -----------------------------   AUTOMETRO_IT -----------------------   ###
 
-df = pd.read_csv("autometro_IT_simple_product.csv")
+
+# Find the latest file that starts with "checked_SKU_"
+files = glob.glob("./output/autometro_IT_simple*.csv")
+
+if files:
+    latest_file = max(files, key=os.path.getctime)
+    # Rest of your code...
+else:
+    print("No files matching the pattern found.")
+
+# Load CSV data
+df = pd.read_csv(latest_file)
 
 df = df[~df['SKU'].str.startswith(('MOP', 'VMO', 'OEM'))]
 
@@ -56,11 +94,25 @@ summary_gt_zero = greater_than_zero.groupby('SKU').agg({'QTY': 'sum', 'Cost': 'm
 
 summary = pd.concat([summary_gt_zero])
 
-summary.to_csv('autometro_IT_xxx.csv', index_label='SKU')
+
+# Generate filename with current date and time
+current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
+filename = f"./output/autometro_IT_xxx_{current_datetime}.csv"
+summary.to_csv(filename, index_label='SKU')
 
 ###  -----------------------------   AUTOMETRO_DE -----------------------   ###
 
-df = pd.read_csv("autometro_DE_simple_product.csv")
+# Find the latest file that starts with "checked_SKU_"
+files = glob.glob("./output/autometro_DE_simple*.csv")
+
+if files:
+    latest_file = max(files, key=os.path.getctime)
+    # Rest of your code...
+else:
+    print("No files matching the pattern found.")
+
+# Load CSV data
+df = pd.read_csv(latest_file)
 
 df = df[~df['SKU'].str.startswith(('MOP', 'VMO', 'OEM'))]
 
@@ -72,4 +124,8 @@ summary_gt_zero = greater_than_zero.groupby('SKU').agg({'QTY': 'sum', 'Cost': 'm
 
 summary = pd.concat([summary_gt_zero])
 
-summary.to_csv('autometro_DE_xxx.csv', index_label='SKU')
+
+# Generate filename with current date and time
+current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
+filename = f"./output/autometro_DE_xxx_{current_datetime}.csv"
+summary.to_csv(filename, index_label='SKU')

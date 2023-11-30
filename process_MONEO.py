@@ -36,13 +36,16 @@ if response.status_code == 200:
         # Drop rows where 'instock' is less than or equal to 0
         df = df[df['instock'] > 0]
 
+        # Exclude rows where 'itemcode' starts with "ORD"
+        df = df[~df['itemcode'].str.startswith("ORD")]
+
         # Drop duplicate rows based on 'itemcode'
         df.drop_duplicates(subset='itemcode', keep='first', inplace=True)
 
         # Save DataFrame to CSV file
-        df.to_csv("/app/output/moneo_daily.csv", index=False)
+        df.to_csv("./output/moneo_daily.csv", index=False)
 
-        print("Data saved to /app/output/moneo_daily.csv")
+        print("Data saved to ./output/moneo_daily.csv")
     except Exception as e:
         print(f"Error processing response: {e}")
 else:

@@ -1,0 +1,5 @@
+*/2 * * * * root echo "Hello from container $(date)"
+0 */2 * * * root /usr/bin/python3 /root/python/process_data_simple_product.py
+0 */3 * * * root /usr/bin/python3 /root/python/process_data_simple_xxx.py
+0 */4 * * * root /usr/bin/python3 /root/python/process_kit.py
+#Empty line
